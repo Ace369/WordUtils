@@ -21,18 +21,19 @@ public class WordUtils
 	
 	/* Constructor */
 	public WordUtils() { 
-		words = new String[100000];
+		words = new String [100000];
 	}
 	
 	/**	Load all of the dictionary from a file into words array. */
 	private void loadWords () {
+		//String[] dict = new String [100000];
 		Scanner input = FileUtils.openToRead(WORD_FILE);
 		int counter = 0;
 		while(input.hasNext()){
 			words[counter] = input.nextLine();
-			System.out.println(words[counter]);
 			counter++;
 		}
+		input.close();
 	}
 	
 	/**	Find all words that can be formed by a list of letters.
@@ -42,6 +43,7 @@ public class WordUtils
 	public String [] findAllWords (String letters)
 	{	String [] wordList = new String [100];
 		int index = 0;
+		loadWords();
 		
 		for(int i = 0; i < words.length; i++){
 			String word = words[i];
@@ -80,7 +82,7 @@ public class WordUtils
 	 */
 	public void printWords (String [] wordList) {
 		for(int i = 0; i < wordList.length; i++){
-			if(!wordList.equals(null)){
+			if(!wordList[i].equals(null)){
 				System.out.printf("%-20s\n\n", wordList[i]);
 			}
 		}
